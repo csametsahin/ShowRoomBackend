@@ -1,0 +1,6 @@
+@ShowRoomBackend_HostAddress = http://localhost:5249
+
+GET {{ShowRoomBackend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
