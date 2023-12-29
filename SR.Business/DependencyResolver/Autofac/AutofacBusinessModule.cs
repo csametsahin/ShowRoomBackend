@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using SR.Business.Abstract;
+using SR.Business.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +13,7 @@ namespace SR.Business.DependencyResolver.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            // add dependency injections here
-            base.Load(builder);
+            builder.RegisterType<UserManager>().As<IUserService>();
         }
     }
 }

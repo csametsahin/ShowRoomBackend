@@ -24,10 +24,7 @@
     <ProjectReference Include="..\SR.Business\SR.Business.csproj" />
     <ProjectReference Include="..\SR.Core\SR.Core.csproj" />
     <ProjectReference Include="..\SR.DataAccess\SR.DataAccess.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\SR.Entities\SR.Entities.csproj" />
   </ItemGroup>
 
 </Project>
