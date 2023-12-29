@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using SR.Entities.Concrete.DbModels;
 
 namespace SR.DataAccess.Concrete.Contexts
 {
@@ -30,12 +31,13 @@ namespace SR.DataAccess.Concrete.Contexts
                     .UseSqlServer(connectionString, conn => conn.CommandTimeout(180))
                     .EnableSensitiveDataLogging()
                     .LogTo(Console.WriteLine, LogLevel.Information)
-                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking); // allows as no-tracking
             }
         }
 
         #region set models
-        // public DbSet<User> Users {get; set;}
+        public DbSet<User> Users { get; set; }
+        public DbSet<Plan> Plans { get; set; }
         #endregion
     }
 }
