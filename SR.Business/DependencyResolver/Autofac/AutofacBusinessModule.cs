@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using SR.Business.Abstract;
 using SR.Business.Concrete;
+using SR.DataAccess.Abstract;
+using SR.DataAccess.Concrete.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,7 @@ namespace SR.Business.DependencyResolver.Autofac
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<UserManager>().As<IUserService>();
+            builder.RegisterType<EfUserDal>().As<IUserDal>();
         }
     }
 }

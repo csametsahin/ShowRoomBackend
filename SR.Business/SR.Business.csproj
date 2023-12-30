@@ -10,4 +10,10 @@
     <PackageReference Include="Autofac" Version="7.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SR.Core\SR.Core.csproj" />
+    <ProjectReference Include="..\SR.DataAccess\SR.DataAccess.csproj" />
+    <ProjectReference Include="..\SR.Entities\SR.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

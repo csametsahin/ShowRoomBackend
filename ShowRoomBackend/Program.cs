@@ -1,5 +1,7 @@
 using Autofac;
+using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SR.Business.DependencyResolver.Autofac;
 using SR.Core.DependencyResolver;
@@ -17,7 +19,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddOptions();
 
+#region add auto mapper
+var mapperConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new MappingProfile());
+});
 
+IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
+#endregion
 
 var connectionString = builder.Configuration.GetSection("ConnectionStrings:SRConnectionString").Value;
 

@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SR.Business.Abstract;
+using SR.Core.Utilities.Messages;
 using SR.Core.Utilities.Results;
+using SR.Entities.Concrete.DbModels;
 using SR.Entities.Concrete.RequestModels.Users;
 using SR.Entities.Concrete.ViewModels.User;
 using IResult = SR.Core.Utilities.Results.IResult;
@@ -9,8 +12,14 @@ namespace SR.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UserController : ControllerBase
     {
+        private readonly IUserService _userService;
+        public UserController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         [HttpGet("GetUser")]
         [ProducesResponseType(typeof(IDataResult<UserViewModel>), 200)]
         public async Task<IActionResult> GetUser(int userId)
@@ -26,10 +35,14 @@ namespace SR.WebAPI.Controllers
         }
 
         [HttpPost("RegisterUser")]
-        [ProducesResponseType(typeof(IResult), 200)]
-        public async Task<IActionResult> RegisterUser([FromBody] UserRegisterRequsetModel userRegisterRequestModel)
+        [ProducesResponseType(typeof(IDataResult<User>), 200)]
+        public async Task<IActionResult> AddUser([FromBody] UserRegisterRequsetModel userRegisterRequestModel)
         {
-            return StatusCode(StatusCodes.Status200OK, Task.FromResult(0));
+            if (!ModelState.IsValid)
+                return StatusCode(StatusCodes.Status406NotAcceptable, Messages.ModelError);
+
+            var result = await _userService.AddAsync(userRegisterRequestModel);
+            return StatusCode(StatusCodes.Status200OK, result);
         }
 
         [HttpPut("UpdateUser")]
