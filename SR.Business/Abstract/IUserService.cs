@@ -11,6 +11,6 @@ namespace SR.Business.Abstract
 {
     public interface IUserService
     {
-        Task<IDataResult<User>> AddAsync(UserRegisterRequsetModel userRequestModel);
+        Task<IDataResult<User>> RegisterAsync(UserRegisterRequsetModel userRequestModel);
     }
 }

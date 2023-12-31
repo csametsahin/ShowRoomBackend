@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using SR.Business.Abstract;
+using SR.Business.Utilities.Constants;
 using SR.Core.Utilities.Helpers;
 using SR.Core.Utilities.Messages;
 using SR.Core.Utilities.Results;
@@ -27,7 +28,7 @@ namespace SR.Business.Concrete
         }
         #endregion
 
-        public async Task<IDataResult<User>> AddAsync(UserRegisterRequsetModel userRequestModel)
+        public async Task<IDataResult<User>> RegisterAsync(UserRegisterRequsetModel userRequestModel)
         {
             try
             {
@@ -44,6 +45,7 @@ namespace SR.Business.Concrete
                     SubscriptionEndDate = userRequestModel.SubscriptionEndDate,
                     IsPaymentGranted = userRequestModel.IsPaymentGranted,
                     IsMailApproved = userRequestModel.IsMailApproved,
+                    PlanId = PlanConstants.EmptyPlanId,
                 };
                 // TODO : Either remove this user return type or change it to UserViewModel 
                 // we will not be returning dbmodels

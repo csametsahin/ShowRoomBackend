@@ -17,6 +17,8 @@ namespace SR.Business.DependencyResolver.Autofac
         {
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<EfUserDal>().As<IUserDal>();
+            builder.RegisterType<PlanManager>().As<IPlanService>();
+            builder.RegisterType<EfPlanDal>().As<IPlanDal>();
         }
     }
 }

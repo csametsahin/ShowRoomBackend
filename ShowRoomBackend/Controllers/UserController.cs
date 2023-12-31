@@ -41,7 +41,7 @@ namespace SR.WebAPI.Controllers
             if (!ModelState.IsValid)
                 return StatusCode(StatusCodes.Status406NotAcceptable, Messages.ModelError);
 
-            var result = await _userService.AddAsync(userRegisterRequestModel);
+            var result = await _userService.RegisterAsync(userRegisterRequestModel);
             return StatusCode(StatusCodes.Status200OK, result);
         }
 

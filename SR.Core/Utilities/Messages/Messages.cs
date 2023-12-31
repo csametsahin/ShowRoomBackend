@@ -16,6 +16,11 @@ namespace SR.Core.Utilities.Messages
 
         public static string UserRegisteredSuccessfully = "User added successfully";
 
+
+        //Plan
+        public static string ErrorWhileAddingPlan = "Error while adding plan";
+
+        public static string PlanAddedSuccessfully = "Plan added succesfully";
         //Model 
         public static string ModelError = "Model is not correct type";
 

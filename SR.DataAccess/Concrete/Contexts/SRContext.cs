@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using SR.Entities.Concrete.DbModels;
 using SR.DataAccess.Concrete.Mappings;
+using SR.DataAccess.Concrete.Configurations;
 
 namespace SR.DataAccess.Concrete.Contexts
 {
@@ -44,7 +45,8 @@ namespace SR.DataAccess.Concrete.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // add your entity configurations here
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration())
+                        .ApplyConfiguration(new PlanConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }
