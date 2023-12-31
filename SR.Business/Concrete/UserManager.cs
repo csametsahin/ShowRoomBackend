@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using SR.Business.Abstract;
+using SR.Core.Utilities.Helpers;
 using SR.Core.Utilities.Messages;
 using SR.Core.Utilities.Results;
 using SR.DataAccess.Abstract;
@@ -38,13 +39,13 @@ namespace SR.Business.Concrete
                     Name = userRequestModel.Name,
                     Surname = userRequestModel.Surname,
                     MailAddress = userRequestModel.MailAddress,
-                    Password = userRequestModel.Password,// TODO : hashing will be added
+                    Password = CryptographyHelper.HashPassword(userRequestModel.Password),
                     CreatedBy = userRequestModel.MailAddress,
                     SubscriptionEndDate = userRequestModel.SubscriptionEndDate,
                     IsPaymentGranted = userRequestModel.IsPaymentGranted,
                     IsMailApproved = userRequestModel.IsMailApproved,
                 };
-                //TODO : Either remove this user return type or change it to UserViewModel 
+                // TODO : Either remove this user return type or change it to UserViewModel 
                 // we will not be returning dbmodels
                 var user = await _userDal.AddAsync(userToAdd);
                 if (user != null)
