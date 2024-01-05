@@ -1,10 +1,5 @@
 ﻿using SR.Entities.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SR.Core.DataAccess
 {
@@ -13,7 +8,7 @@ namespace SR.Core.DataAccess
         Task<T> AddAsync(T entity);
         Task<List<T>> AddAllAsync(List<T> entityList);
         Task<T> UpdateAsync(T entity, string updatedBy);
-        Task<List<T>> UpdateAllAsync(List<T> entityList,string updatedBy);
+        Task<List<T>> UpdateAllAsync(List<T> entityList, string updatedBy);
         Task DeleteAsync(T entity, string updatedBy, bool isHardDelete = false);
         Task DeleteAllAsync(List<T> entityList, string updatedBy, bool isHarDelete = false);
         Task<T> GetAsync(Expression<Func<T, bool>> predicate);

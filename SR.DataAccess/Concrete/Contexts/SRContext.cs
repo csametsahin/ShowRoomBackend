@@ -1,14 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Builder;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using SR.Entities.Concrete.DbModels;
-using SR.DataAccess.Concrete.Mappings;
 using SR.DataAccess.Concrete.Configurations;
+using SR.DataAccess.Concrete.Mappings;
+using SR.Entities.Concrete.DbModels;
 
 namespace SR.DataAccess.Concrete.Contexts
 {

@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using SR.Entities.Concrete.DbModels;
 using SR.Entities.Concrete.ViewModels.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SR.Core.Extensions
 {

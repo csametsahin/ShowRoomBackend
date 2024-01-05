@@ -2,29 +2,28 @@
 using SR.Business.Abstract;
 using SR.Business.Utilities.Constants;
 using SR.Core.Utilities.Helpers;
+using SR.Core.Utilities.Localization;
 using SR.Core.Utilities.Messages;
 using SR.Core.Utilities.Results;
 using SR.DataAccess.Abstract;
 using SR.Entities.Concrete.DbModels;
 using SR.Entities.Concrete.RequestModels.Users;
-using SR.Entities.Concrete.ViewModels.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SR.Entities.Enums;
 
 namespace SR.Business.Concrete
 {
     public class UserManager : IUserService
     {
         private readonly IUserDal _userDal;
-        
+
+
+        private readonly ILocalizationService _localizationService;
 
         #region DIs
-        public UserManager(IUserDal userDal)
+        public UserManager(IUserDal userDal, ILocalizationService localizationService)
         {
             _userDal = userDal;
+            _localizationService = localizationService;
         }
         #endregion
 
@@ -34,7 +33,7 @@ namespace SR.Business.Concrete
             {
                 var isUserExist = _userDal.CheckIfExists(_ => _.MailAddress == userRequestModel.MailAddress);
                 if (isUserExist)
-                    return new ErrorDataResult<User>(Messages.ErrorWhileAddingUserEmailAlreadyExists, StatusCodes.Status401Unauthorized);
+                    return new ErrorDataResult<User>(_localizationService[MessageCodes.ErrorWhileAddingUserEmailAlreadyExists], StatusCodes.Status401Unauthorized);
                 var userToAdd = new User
                 {
                     Name = userRequestModel.Name,
@@ -55,7 +54,7 @@ namespace SR.Business.Concrete
 
                 return new ErrorDataResult<User>(Messages.ErrorWhileAddingUser, StatusCodes.Status500InternalServerError);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new ErrorDataResult<User>(Messages.ErrorWhileAddingUser, StatusCodes.Status500InternalServerError);
             }

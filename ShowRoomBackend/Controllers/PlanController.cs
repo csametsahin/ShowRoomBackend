@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SR.Business.Abstract;
 using SR.Core.Utilities.Messages;
-using SR.Core.Utilities.Results;
-using SR.Entities.Concrete.DbModels;
 using SR.Entities.Concrete.RequestModels.Plans;
-using SR.Entities.Concrete.RequestModels.Users;
 using IResult = SR.Core.Utilities.Results.IResult;
 
 namespace SR.WebAPI.Controllers

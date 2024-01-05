@@ -1,13 +1,9 @@
 ﻿using Autofac;
 using SR.Business.Abstract;
 using SR.Business.Concrete;
+using SR.Core.Utilities.Localization;
 using SR.DataAccess.Abstract;
 using SR.DataAccess.Concrete.EntityFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SR.Business.DependencyResolver.Autofac
 {
@@ -19,6 +15,7 @@ namespace SR.Business.DependencyResolver.Autofac
             builder.RegisterType<EfUserDal>().As<IUserDal>();
             builder.RegisterType<PlanManager>().As<IPlanService>();
             builder.RegisterType<EfPlanDal>().As<IPlanDal>();
+            builder.RegisterType<LocalizationService>().As<ILocalizationService>();
         }
     }
 }

@@ -1,12 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
-using SR.Entities.Concrete.BaseEntities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SR.Core.DataAccess.Constants;
+using SR.Entities.Concrete.BaseEntities;
 
 namespace SR.DataAccess.Concrete.Configurations.BaseConfiguration
 {

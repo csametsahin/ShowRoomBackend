@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SR.Core.Utilities.Results
 {
@@ -17,7 +12,7 @@ namespace SR.Core.Utilities.Results
         {
         }
 
-        public SuccessDataResult() : base(default,true,default,StatusCodes.Status200OK)
+        public SuccessDataResult() : base(default, true, default, StatusCodes.Status200OK)
         {
 
         }

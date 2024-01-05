@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SR.Core.Utilities.Results
+﻿namespace SR.Core.Utilities.Results
 {
     public class Result : IResult
     {
-        public Result(bool success,string message,int code) : this(success)
+        public Result(bool success, string message, int code) : this(success)
         {
             Message = message;
             Code = code;
         }
 
-        public Result(bool success) 
+        public Result(bool success)
         {
             Success = success;
         }
