@@ -42,7 +42,7 @@ namespace SR.WebAPI.Controllers
                 return StatusCode(StatusCodes.Status406NotAcceptable, Messages.ModelError);
 
             var result = await _userService.RegisterAsync(userRegisterRequestModel);
-            return StatusCode(StatusCodes.Status200OK, result);
+            return StatusCode(result.Code, result);
         }
 
         [HttpPut("UpdateUser")]

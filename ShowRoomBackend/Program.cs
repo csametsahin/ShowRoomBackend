@@ -2,12 +2,15 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Serilog.Events;
+using Serilog;
 using SR.Business.DependencyResolver.Autofac;
 using SR.Core.DependencyResolver;
 using SR.Core.Extensions;
 using SR.Core.Utilities.IoC;
 using SR.DataAccess.Concrete.Contexts;
 using System.Globalization;
+using Serilog.Sinks.MSSqlServer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,6 +56,19 @@ builder.Services.AddSingleton(mapper);
 
 var connectionString = builder.Configuration.GetSection("ConnectionStrings:SRConnectionString").Value;
 
+#region logger
+var logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .MinimumLevel.Information()
+    .Enrich.FromLogContext()
+    .WriteTo.Debug(LogEventLevel.Information)
+    .WriteTo.MSSqlServer(connectionString: connectionString, sinkOptions: new MSSqlServerSinkOptions { TableName = "Logs", AutoCreateSqlTable = true })
+    .CreateLogger();
+builder.Host.UseSerilog(logger);
+
+#endregion
+
+
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new AutofacBusinessModule()));
 builder.Services
@@ -61,6 +77,8 @@ builder.Services
     {
         new CoreModule()
     });
+
+
 
 var app = builder.Build();
 
@@ -75,6 +93,9 @@ app.UseHttpsRedirection();
 
 app.UseRequestLocalization();
 app.UseAuthorization();
+
+app.UseSerilogRequestLogging();
+
 
 app.MapControllers();
 

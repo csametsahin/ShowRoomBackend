@@ -117,7 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ErrorWhileAddingPlan" xml:space="preserve">
+    <value>Error while adding plan !</value>
+  </data>
+  <data name="ErrorWhileAddingUser" xml:space="preserve">
+    <value>Error while adding user !</value>
+  </data>
   <data name="ErrorWhileAddingUserEmailAlreadyExists" xml:space="preserve">
     <value>Error while adding user , email already exists please login !</value>
+  </data>
+  <data name="ModelError" xml:space="preserve">
+    <value>Model is not correct type</value>
+  </data>
+  <data name="PlanAddedSuccessfully" xml:space="preserve">
+    <value>Plan added successfully</value>
+  </data>
+  <data name="UserRegisteredSuccessfully" xml:space="preserve">
+    <value>User registered succesffully !</value>
   </data>
 </root>

@@ -12,6 +12,8 @@ namespace SR.WebAPI.Controllers
     {
         private readonly IPlanService _planService;
 
+
+
         public PlanController(IPlanService planService)
         {
             _planService = planService;
@@ -24,7 +26,7 @@ namespace SR.WebAPI.Controllers
                 return StatusCode(StatusCodes.Status406NotAcceptable, Messages.ModelError);
 
             var result = await _planService.AddAsync(addPlanRequestModel);
-            return StatusCode(StatusCodes.Status200OK, result.Message);
+            return StatusCode(result.Code, result.Message);
         }
     }
 }

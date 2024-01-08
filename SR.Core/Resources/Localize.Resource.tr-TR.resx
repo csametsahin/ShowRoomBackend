@@ -117,7 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ErrorWhileAddingPlan" xml:space="preserve">
+    <value>Plan eklerken bir sorun oluştu !</value>
+  </data>
+  <data name="ErrorWhileAddingUser" xml:space="preserve">
+    <value>Kullancıyı eklerken bir hata oluştu !</value>
+  </data>
   <data name="ErrorWhileAddingUserEmailAlreadyExists" xml:space="preserve">
     <value>Kullanıcıyı eklerken bir hata oluştu , bu email adresi daha önce kullanılmış !</value>
+  </data>
+  <data name="ModelError" xml:space="preserve">
+    <value>Hatalı istek !</value>
+  </data>
+  <data name="PlanAddedSuccessfully" xml:space="preserve">
+    <value>Plan başarılı bir şekilde eklendi !</value>
+  </data>
+  <data name="UserRegisteredSuccessfully" xml:space="preserve">
+    <value>Kullanıcı başarıyla kayıt edildi !</value>
   </data>
 </root>
