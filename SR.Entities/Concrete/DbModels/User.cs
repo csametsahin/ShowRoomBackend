@@ -16,5 +16,7 @@ namespace SR.Entities.Concrete.DbModels
         [ForeignKey(nameof(Plan))]
         public int PlanId { get; set; }
         public virtual Plan Plan { get; set; }
+
+        public virtual ICollection<CreditCard> CreditCards { get; set; }
     }
 }

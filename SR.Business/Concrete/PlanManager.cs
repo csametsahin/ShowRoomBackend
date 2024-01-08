@@ -46,8 +46,8 @@ namespace SR.Business.Concrete
             }
             catch (Exception ex)
             {
-                //TODO logging will be adeded , payment will be aded
-                _logger.Error($"Error thrown in AddAsync on PlanManager Error - {ex} ");
+                //TODO payment will be aded
+                _logger.Error($"Error thrown in AddAsync on PlanManager Exception - {ex} ");
                 return new ErrorResult(_localizationService[MessageCodes.ErrorWhileAddingPlan], StatusCodes.Status500InternalServerError);
             }
         }

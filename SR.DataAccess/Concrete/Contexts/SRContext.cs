@@ -35,13 +35,19 @@ namespace SR.DataAccess.Concrete.Contexts
         #region set models
         public DbSet<User> Users { get; set; }
         public DbSet<Plan> Plans { get; set; }
+        public DbSet<CreditCard> CreditCards { get; set; }
+        public DbSet<ShowRoom> ShowRooms { get; set; }
+        public DbSet<ShowRoomImages> ShowRoomImages { get; set; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // add your entity configurations here
             modelBuilder.ApplyConfiguration(new UserConfiguration())
-                        .ApplyConfiguration(new PlanConfiguration());
+                        .ApplyConfiguration(new PlanConfiguration())
+                        .ApplyConfiguration(new CreditCardConfiguration())
+                        .ApplyConfiguration(new ShowRoomConfiguration())
+                        .ApplyConfiguration(new ShowRoomImagesConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

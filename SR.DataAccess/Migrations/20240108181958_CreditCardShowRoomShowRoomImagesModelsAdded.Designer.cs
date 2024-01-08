@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SR.DataAccess.Concrete.Contexts;
 
@@ -11,9 +12,11 @@ using SR.DataAccess.Concrete.Contexts;
 namespace SR.DataAccess.Migrations
 {
     [DbContext(typeof(SRContext))]
-    partial class SRContextModelSnapshot : ModelSnapshot
+    [Migration("20240108181958_CreditCardShowRoomShowRoomImagesModelsAdded")]
+    partial class CreditCardShowRoomShowRoomImagesModelsAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
