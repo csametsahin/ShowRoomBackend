@@ -27,7 +27,6 @@ builder.Services.AddLocalization(options =>
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
     options.DefaultRequestCulture = new("tr-TR");
-    // TODO accept this with middleware
     CultureInfo[] cultures = new CultureInfo[]
     {
         new("tr-TR"),

@@ -15,6 +15,10 @@ namespace SR.Business.DependencyResolver.Autofac
             builder.RegisterType<EfUserDal>().As<IUserDal>();
             builder.RegisterType<PlanManager>().As<IPlanService>();
             builder.RegisterType<EfPlanDal>().As<IPlanDal>();
+            builder.RegisterType<ShowRoomManager>().As<IShowRoomService>();
+            builder.RegisterType<EfShowRoomDal>().As<IShowRoomDal>();
+            builder.RegisterType<EfCreditCardDal>().As<ICreditCardDal>();
+            builder.RegisterType<EfShowRoomImagesDal>().As<IShowRoomImagesDal>();
             builder.RegisterType<LocalizationService>().As<ILocalizationService>();
         }
     }
