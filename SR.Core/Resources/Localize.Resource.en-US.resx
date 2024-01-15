@@ -126,11 +126,23 @@
   <data name="ErrorWhileAddingUserEmailAlreadyExists" xml:space="preserve">
     <value>Error while adding user , email already exists please login !</value>
   </data>
+  <data name="ErrorWhileLoginUserAsync" xml:space="preserve">
+    <value>Error while login user !</value>
+  </data>
   <data name="ModelError" xml:space="preserve">
     <value>Model is not correct type</value>
   </data>
+  <data name="PasswordError" xml:space="preserve">
+    <value>Password is not right !</value>
+  </data>
   <data name="PlanAddedSuccessfully" xml:space="preserve">
     <value>Plan added successfully</value>
+  </data>
+  <data name="UserLoggedInSuccessfully" xml:space="preserve">
+    <value>User logged in successfully !</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>User not found !</value>
   </data>
   <data name="UserRegisteredSuccessfully" xml:space="preserve">
     <value>User registered succesffully !</value>

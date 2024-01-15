@@ -23,7 +23,7 @@ namespace SR.Business.Concrete
         private readonly IMapper _mapper;
 
         #region DIs
-        public UserManager(IUserDal userDal, ILocalizationService localizationService,IMapper mapper)
+        public UserManager(IUserDal userDal, ILocalizationService localizationService, IMapper mapper)
         {
             _userDal = userDal;
             _localizationService = localizationService;
@@ -60,6 +60,25 @@ namespace SR.Business.Concrete
             catch (Exception ex)
             {
                 return new ErrorDataResult<UserViewModel>(_localizationService[MessageCodes.ErrorWhileAddingUser], StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        public async Task<IDataResult<UserViewModel>> LoginAsync(UserLoginRequestModel userLoginRequestModel)
+        {
+            try
+            {
+                var model = await _userDal.GetAsync(_ => _.MailAddress == userLoginRequestModel.MailAddress);
+                if (model == null)
+                    return new ErrorDataResult<UserViewModel>(_localizationService[MessageCodes.UserNotFound], StatusCodes.Status500InternalServerError);
+                var passCheck = CryptographyHelper.VerifyPassword(userLoginRequestModel.Password, model.Password);
+                if (!passCheck)
+                    return new ErrorDataResult<UserViewModel>(_localizationService[MessageCodes.PasswordError], StatusCodes.Status500InternalServerError);
+
+                return new SuccessDataResult<UserViewModel>(_mapper.Map<UserViewModel>(model), _localizationService[MessageCodes.UserLoggedInSuccessfully], StatusCodes.Status200OK);
+            }
+            catch (Exception ex)
+            {
+                return new ErrorDataResult<UserViewModel>(_localizationService[MessageCodes.ErrorWhileLoginUserAsync], StatusCodes.Status500InternalServerError);
             }
         }
     }

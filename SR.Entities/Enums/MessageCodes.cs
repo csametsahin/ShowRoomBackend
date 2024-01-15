@@ -8,6 +8,10 @@
         ErrorWhileAddingPlan,
         PlanAddedSuccessfully,
         ModelError,
+        ErrorWhileLoginUserAsync,
+        PasswordError,
+        UserLoggedInSuccessfully,
+        UserNotFound,
 
     }
 }

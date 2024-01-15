@@ -7,5 +7,6 @@ namespace SR.Business.Abstract
     public interface IUserService
     {
         Task<IDataResult<UserViewModel>> RegisterAsync(UserRegisterRequsetModel userRequestModel);
+        Task<IDataResult<UserViewModel>> LoginAsync(UserLoginRequestModel userLoginRequestModel);
     }
 }

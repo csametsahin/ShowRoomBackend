@@ -44,6 +44,16 @@ namespace SR.WebAPI.Controllers
             var result = await _userService.RegisterAsync(userRegisterRequestModel);
             return StatusCode(result.Code, result);
         }
+        [HttpPost("Login")]
+        [ProducesResponseType(typeof(IDataResult<User>), 200)]
+        public async Task<IActionResult> LoginUser([FromBody] UserLoginRequestModel userLoginRequestModel)
+        {
+            if (!ModelState.IsValid)
+                return StatusCode(StatusCodes.Status406NotAcceptable, Messages.ModelError);
+
+            var result = await _userService.LoginAsync(userLoginRequestModel);
+            return StatusCode(result.Code, result);
+        }
 
         [HttpPut("UpdateUser")]
         [ProducesResponseType(typeof(IResult), 200)]
