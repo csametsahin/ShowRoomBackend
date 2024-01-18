@@ -17,6 +17,7 @@ namespace SR.DataAccess.Concrete.Configurations.BaseConfiguration
             builder.Property(c => c.CreatedBy)
                 .HasDefaultValue(DefaultValues.FROMSYSTEM)
                 .HasMaxLength(100);
+            // is sparese means mostlye empty to save space on db
             builder.Property(c => c.UpdatedBy)
                 .HasMaxLength(100)
                 .IsSparse();
