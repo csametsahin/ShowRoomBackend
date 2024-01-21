@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SR.Business.Abstract;
 using SR.Core.Utilities.Messages;
 using SR.Core.Utilities.Results;
@@ -21,6 +22,7 @@ namespace SR.WebAPI.Controllers
         }
 
         [HttpGet("GetUser")]
+        [Authorize]
         [ProducesResponseType(typeof(IDataResult<UserViewModel>), 200)]
         public async Task<IActionResult> GetUser(int userId)
         {
@@ -29,6 +31,7 @@ namespace SR.WebAPI.Controllers
 
         [HttpGet("GetListOfUsers")]
         [ProducesResponseType(typeof(IDataResult<List<UserViewModel>>), 200)]
+        [Authorize]
         public async Task<IActionResult> GetListOfUsers()
         {
             return StatusCode(StatusCodes.Status200OK, Task.FromResult(0));
@@ -36,6 +39,7 @@ namespace SR.WebAPI.Controllers
 
         [HttpPost("RegisterUser")]
         [ProducesResponseType(typeof(IDataResult<User>), 200)]
+        [AllowAnonymous]
         public async Task<IActionResult> AddUser([FromBody] UserRegisterRequsetModel userRegisterRequestModel)
         {
             if (!ModelState.IsValid)
@@ -46,6 +50,7 @@ namespace SR.WebAPI.Controllers
         }
         [HttpPost("Login")]
         [ProducesResponseType(typeof(IDataResult<User>), 200)]
+        [AllowAnonymous]
         public async Task<IActionResult> LoginUser([FromBody] UserLoginRequestModel userLoginRequestModel)
         {
             if (!ModelState.IsValid)
@@ -56,6 +61,7 @@ namespace SR.WebAPI.Controllers
         }
 
         [HttpPut("UpdateUser")]
+        [Authorize]
         [ProducesResponseType(typeof(IResult), 200)]
         public async Task<IActionResult> UpdateUser([FromBody] UserUpdateRequestModel userUpdateRequestModel)
         {
@@ -64,6 +70,7 @@ namespace SR.WebAPI.Controllers
 
         [HttpDelete("DeleteUser")]
         [ProducesResponseType(typeof(IResult), 200)]
+        [Authorize]
         public async Task<IActionResult> DeleteUser(int userId)
         {
             return StatusCode(StatusCodes.Status200OK, Task.FromResult(0));

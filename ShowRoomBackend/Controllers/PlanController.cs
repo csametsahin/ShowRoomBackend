@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SR.Business.Abstract;
 using SR.Core.Utilities.Messages;
 using SR.Entities.Concrete.RequestModels.Plans;
@@ -12,14 +13,13 @@ namespace SR.WebAPI.Controllers
     {
         private readonly IPlanService _planService;
 
-
-
         public PlanController(IPlanService planService)
         {
             _planService = planService;
         }
         [HttpPost("AddPlan")]
         [ProducesResponseType(typeof(IResult), 200)]
+        [Authorize]
         public async Task<IActionResult> AddPlan([FromBody] AddPlanRequestModel addPlanRequestModel)
         {
             if (!ModelState.IsValid)
