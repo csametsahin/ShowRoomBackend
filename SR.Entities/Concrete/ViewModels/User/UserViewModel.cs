@@ -11,5 +11,8 @@
         public DateTime SubscriptionEndDate { get; set; }
         public string PlanName { get; set; }
         public string PlanId { get; set; }
+        // do not use this on this view model move it to userloginviewmodel smth. like
+        public string Token { get; set; }
+        public DateTime Expiration { get; set; }
     }
 }

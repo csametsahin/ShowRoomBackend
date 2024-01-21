@@ -6,6 +6,7 @@ using SR.Core.Utilities.Helpers;
 using SR.Core.Utilities.Localization;
 using SR.Core.Utilities.Messages;
 using SR.Core.Utilities.Results;
+using SR.Core.Utilities.Security.Jwt;
 using SR.DataAccess.Abstract;
 using SR.Entities.Concrete.DbModels;
 using SR.Entities.Concrete.RequestModels.Users;
@@ -21,13 +22,15 @@ namespace SR.Business.Concrete
 
         private readonly ILocalizationService _localizationService;
         private readonly IMapper _mapper;
+        private readonly IJwtTokenHelper _jwtTokenHelper;
 
         #region DIs
-        public UserManager(IUserDal userDal, ILocalizationService localizationService, IMapper mapper)
+        public UserManager(IUserDal userDal, ILocalizationService localizationService, IMapper mapper,IJwtTokenHelper jwtTokenHelper)
         {
             _userDal = userDal;
             _localizationService = localizationService;
             _mapper = mapper;
+            _jwtTokenHelper = jwtTokenHelper;
         }
         #endregion
 
@@ -63,22 +66,30 @@ namespace SR.Business.Concrete
             }
         }
 
-        public async Task<IDataResult<UserViewModel>> LoginAsync(UserLoginRequestModel userLoginRequestModel)
+        public async Task<IDataResult<UserLoginViewModel>> LoginAsync(UserLoginRequestModel userLoginRequestModel)
         {
             try
             {
                 var model = await _userDal.GetAsync(_ => _.MailAddress == userLoginRequestModel.MailAddress);
                 if (model == null)
-                    return new ErrorDataResult<UserViewModel>(_localizationService[MessageCodes.UserNotFound], StatusCodes.Status500InternalServerError);
+                    return new ErrorDataResult<UserLoginViewModel>(_localizationService[MessageCodes.UserNotFound], StatusCodes.Status500InternalServerError);
                 var passCheck = CryptographyHelper.VerifyPassword(userLoginRequestModel.Password, model.Password);
                 if (!passCheck)
-                    return new ErrorDataResult<UserViewModel>(_localizationService[MessageCodes.PasswordError], StatusCodes.Status500InternalServerError);
+                    return new ErrorDataResult<UserLoginViewModel>(_localizationService[MessageCodes.PasswordError], StatusCodes.Status500InternalServerError);
+                var tokenResponse = await _jwtTokenHelper.CreateToken(model);
 
-                return new SuccessDataResult<UserViewModel>(_mapper.Map<UserViewModel>(model), _localizationService[MessageCodes.UserLoggedInSuccessfully], StatusCodes.Status200OK);
+                var userResponse = new UserLoginViewModel
+                {
+                    Expiration = tokenResponse.Expiration,
+                    Token = tokenResponse.Token,
+                    Username = model.MailAddress,
+                };
+
+                return new SuccessDataResult<UserLoginViewModel>(userResponse, _localizationService[MessageCodes.UserLoggedInSuccessfully], StatusCodes.Status200OK);
             }
             catch (Exception ex)
             {
-                return new ErrorDataResult<UserViewModel>(_localizationService[MessageCodes.ErrorWhileLoginUserAsync], StatusCodes.Status500InternalServerError);
+                return new ErrorDataResult<UserLoginViewModel>(_localizationService[MessageCodes.ErrorWhileLoginUserAsync], StatusCodes.Status500InternalServerError);
             }
         }
     }
