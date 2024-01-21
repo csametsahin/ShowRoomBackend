@@ -18,7 +18,10 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+var connectionString = builder.Configuration.GetSection("ConnectionStrings:SRConnectionString").Value;
+var validIssuer = builder.Configuration.GetSection("AppSettings:ValidIssuer").Value;
+var validAudience = builder.Configuration.GetSection("AppSettings:ValidAudience").Value;
+var secretKey = builder.Configuration.GetSection("AppSettings:Secret").Value;
 builder.Services.AddControllers();
 // Jwt Config
 builder.Services.AddAuthentication(options =>
@@ -30,9 +33,9 @@ builder.Services.AddAuthentication(options =>
 {
     o.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidIssuer = builder.Configuration["AppSettings:ValidIssuer"],
-        ValidAudience = builder.Configuration["AppSettings:ValidAudience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["AppSettings:Secret"])),
+        ValidIssuer = validIssuer,
+        ValidAudience = validAudience,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey)),
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = false,
@@ -76,7 +79,7 @@ IMapper mapper = mapperConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
 #endregion
 
-var connectionString = builder.Configuration.GetSection("ConnectionStrings:SRConnectionString").Value;
+
 
 #region logger
 var logger = new LoggerConfiguration()
