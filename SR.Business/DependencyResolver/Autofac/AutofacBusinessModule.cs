@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using SR.Business.Abstract;
 using SR.Business.Concrete;
+using SR.Core.CrossCuttingConcerns.Caching;
+using SR.Core.CrossCuttingConcerns.Caching.Redis;
 using SR.Core.Utilities.Localization;
 using SR.Core.Utilities.Security.Jwt;
 using SR.DataAccess.Abstract;
@@ -13,6 +15,8 @@ namespace SR.Business.DependencyResolver.Autofac
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<JwtTokenHelper>().As<IJwtTokenHelper>();
+            builder.RegisterType<RedisCacheManager>().As<ICacheService>();
+
 
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<EfUserDal>().As<IUserDal>();

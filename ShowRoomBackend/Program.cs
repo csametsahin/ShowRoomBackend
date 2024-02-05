@@ -14,6 +14,7 @@ using Serilog.Sinks.MSSqlServer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,12 @@ var connectionString = builder.Configuration.GetSection("ConnectionStrings:SRCon
 var validIssuer = builder.Configuration.GetSection("AppSettings:ValidIssuer").Value;
 var validAudience = builder.Configuration.GetSection("AppSettings:ValidAudience").Value;
 var secretKey = builder.Configuration.GetSection("AppSettings:Secret").Value;
+var redisConnectionString = builder.Configuration.GetSection("ConnectionStrings:Redis").Value;
+
+var multiplexer = ConnectionMultiplexer.Connect(redisConnectionString);
+builder.Services.AddSingleton<IConnectionMultiplexer>(multiplexer);
+
+
 builder.Services.AddControllers();
 // Jwt Config
 builder.Services.AddAuthentication(options =>
